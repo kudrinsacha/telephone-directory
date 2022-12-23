@@ -3,10 +3,10 @@ axios.defaults.withCredentials = true;
 
 const API_URL = 'http://localhost:5000'
 
-export async function getToken() {
+export async function getToken(setIsToken) {
     try{
-        const response = await axios.get(`${API_URL}/token`)
-        console.log(response.data.access_token);
+        await axios.get(`${API_URL}/token`)
+        setIsToken(true)
     } catch(err) {
         console.log(err);
     }
@@ -15,7 +15,10 @@ export async function getToken() {
 export async function getExtensions(setList) {
     try{
         const response = await axios.get(`${API_URL}/extensions`)
-        console.log(response);
+
+        if(response.data.hint && response.data.hint === 'Access token has been revoked'){
+            await axios.get(`${API_URL}/clearCookie`)
+        }
         setList(response.data.data.fetchAllExtensions.extension);
     } catch(err) {
         console.log(err);

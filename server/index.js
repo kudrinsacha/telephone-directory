@@ -16,9 +16,17 @@ app.use(
   })
 );
 
+app.get("/clearCookie", (req, res) => {
+  res.clearCookie('token')
+  res.send('token delete')
+})
+
 app.get("/token", (req, res) => {
-  console.log(req.cookies);
+
+  const accessToken = [];
+
   if (!req.cookies.token) {
+
     request.post(
       {
         url: `${process.env.PBX_URL}/token`,
@@ -31,12 +39,22 @@ app.get("/token", (req, res) => {
           pass: `${process.env.CLIENT_SECRET}`,
         },
       },
+
       (err, response, body) => {
         if (err) return res.status(500).send({ message: err });
-        res.cookie("token", body, { maxAge: 3600, httpOnly: true });
+
+        for(let i = 57; i < body.length; i++){
+          accessToken.push(body[i])
+        }
+
+        const replaceAccessToken = JSON.stringify(accessToken).replace(/"|,|}|\\|]|\[/gi, '');
+
+        res.cookie("token", replaceAccessToken, { maxAge: 3600000, httpOnly: true });
         return res.send(body);
       }
+
     );
+
   }
 });
 
@@ -45,9 +63,8 @@ app.get("/extensions", (req, res) => {
     {
       'url': `${process.env.PBX_URL}/gql`,
       headers: {
-        'Authorization': `Bearer ${process.env.ACCESS_TOKEN}`,
-        'Content-Type': 'application/json',
-        'Cookie': 'PHPSESSID=mslaiuaqui15trgbt8ibeoogu4'
+        'Authorization': `Bearer ${req.cookies.token}`,
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify({
         query: `query {
@@ -62,14 +79,15 @@ app.get("/extensions", (req, res) => {
           }
         }
       }
-    }`,
-        variables: {}
+    }`
       })
     },
+
     (err, response, body) => {
       if (err) return res.status(500).send({ message: err });
       return res.send(body);
     }
+
   )
 });
 

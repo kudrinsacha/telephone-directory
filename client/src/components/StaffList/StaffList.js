@@ -6,15 +6,20 @@ import './StaffList.css'
 const StaffList = () => {
 
     const [list, setList] = useState('')
+    const [isToken, setIsToken] = useState(false)
 
     useEffect(() => {
-    //   getToken()
-      getExtensions(setList)
+      getToken(setIsToken)
     }, [])
+
+    useEffect(() => {
+      getExtensions(setList)
+    }, [isToken])
   
 
   return (
     <div className='staff-list'>
+
      {list.length > 1 &&
         list.map(item => {
         return <div className='staff-list-item' key = {item.extensionId}> 
@@ -24,6 +29,7 @@ const StaffList = () => {
         </div>
      })
      }
+
     </div>
   )
 }
