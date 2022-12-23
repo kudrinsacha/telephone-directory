@@ -1,11 +1,12 @@
 import {useEffect} from 'react'
-import { getToken } from './http/http';
+import { getExtensions, getToken } from './http/http';
 import './App.css';
 
 function App() {
 
   useEffect(() => {
     getToken()
+    getExtensions()
   }, [])
 
   return (
