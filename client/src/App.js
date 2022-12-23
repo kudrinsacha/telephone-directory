@@ -1,17 +1,13 @@
-import {useEffect} from 'react'
-import { getExtensions, getToken } from './http/http';
+import StaffList from './components/StaffList/StaffList';
 import './App.css';
 
 function App() {
 
-  useEffect(() => {
-    getToken()
-    getExtensions()
-  }, [])
-
   return (
     <div>
-     
+
+     <StaffList/>
+
     </div>
   );
 }

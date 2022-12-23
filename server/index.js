@@ -17,11 +17,11 @@ app.use(
 );
 
 app.get("/token", (req, res) => {
-  console.log(Object.values(req.cookies));
+  console.log(req.cookies);
   if (!req.cookies.token) {
     request.post(
       {
-        url: "http://192.168.0.101/admin/api/api/token",
+        url: `${process.env.PBX_URL}/token`,
         headers: {
           "Content-Type": "application/x-www-form-urlencoded",
         },
@@ -41,34 +41,36 @@ app.get("/token", (req, res) => {
 });
 
 app.get("/extensions", (req, res) => {
-  request.post({
-    url: "http://192.168.0.101/admin/api/api/gql",
-    headers: {
-      Authorization: `Bearer ${req.cookies}`,
-      "Content-Type": "application/json",
-      Cookie: "PHPSESSID=vpmaub0t8sf886023djo1ealfn",
-    },
-    body: JSON.stringify({
-      query: `query{
-  fetchAllExtensions{
-    status
-    message
-    totalCount
-    extension{
-      user{
-        name
-        extension
+  request.post(
+    {
+      'url': `${process.env.PBX_URL}/gql`,
+      headers: {
+        'Authorization': `Bearer ${process.env.ACCESS_TOKEN}`,
+        'Content-Type': 'application/json',
+        'Cookie': 'PHPSESSID=mslaiuaqui15trgbt8ibeoogu4'
+      },
+      body: JSON.stringify({
+        query: `query {
+      fetchAllExtensions {
+        status
+        message
+        totalCount
+        extension {
+          extensionId
+          coreDevice {
+            description
+          }
+        }
       }
+    }`,
+        variables: {}
+      })
+    },
+    (err, response, body) => {
+      if (err) return res.status(500).send({ message: err });
+      return res.send(body);
     }
-  }
-}`,
-      variables: {},
-    }),
-  });
-  (err, response, body) => {
-    if (err) return res.status(500).send({ message: err });
-    return res.send(body);
-  };
+  )
 });
 
 app.listen(PORT, () => console.log(`Server started on PORT = ${PORT}`));
