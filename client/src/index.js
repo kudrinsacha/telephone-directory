@@ -6,10 +6,7 @@ import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  // <React.StrictMode> 
     <App />
-  // </React.StrictMode>
-  // отключил строгий режим, чтобы страница не рендерилась дважды, в продакшн сборке он отключается автоматически
 );
 
 reportWebVitals();

@@ -1,12 +1,16 @@
+import Header from "./components/Header/Header";
 import StaffList from './components/StaffList/StaffList';
 import './App.css';
 
 function App() {
 
   return (
-    <div>
+    <div className='app'>
 
-     <StaffList/>
+        <div className='container'>
+            <Header/>
+            <StaffList/>
+        </div>
 
     </div>
   );

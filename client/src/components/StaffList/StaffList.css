@@ -1,5 +1,65 @@
-.staff-list{
-    text-align: center;
-    white-space: nowrap;
-    color: #C0C0C0;
+.staff__list{
+    height: 900px;
+    position: relative;
+}
+
+.staff__list__search{
+    padding: 15px 0 0;
+    margin: 13px 0;
+    width: 50%;
+
+}
+.staff__list__search input{
+    width: 50%;
+    border: 0;
+    border-bottom: 2px solid #9b9b9b;
+    outline: 0;
+    font-size: 1.3rem;
+    color: #fff;
+    padding: 7px 0;
+    background: transparent;
+    transition: border-color 0.2s;
+}
+.staff__list__search input::placeholder{
+    color: transparent;
+}
+.staff__list__search input:placeholder-shown ~ .staff__list__search__label{
+    font-size: 1.3rem;
+    cursor: text;
+    top: 20px;
+}
+.staff__list__search__label{
+    position: absolute;
+    top: 0;
+    display: block;
+    transition: 0.2s;
+    font-size: 1rem;
+    color: #9b9b9b;
+}
+.staff__list__search input:focus{
+    padding-bottom: 6px;
+    border-width: 3px;
+}
+.staff__list__search input:focus ~ .staff__list__search__label{
+    position: absolute;
+    top: 0;
+    display: block;
+    transition: 0.2s;
+    font-size: 1rem;
+}
+.staff__list__search input:required{
+    box-shadow:none;
+}
+.staff__list__search input:invalid{
+    box-shadow:none;
+}
+
+.staff__list__title{
+    color: white;
+    font-size: 24px;
+    display: flex;
+    justify-content: space-between;
+    width: 500px;
+    margin-left: 100px;
+    border-bottom: 1px solid white;
 }
