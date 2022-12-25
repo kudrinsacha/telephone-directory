@@ -1,7 +1,7 @@
 import React from 'react';
 import './Pagination.css'
 
-const Pagination = ({staffPerPage, listLength, paginate, currentPage}) => {
+const Pagination = ({staffPerPage, listLength, paginate, currentPage, search}) => {
 
     const pageNumbers = []
 
@@ -10,7 +10,7 @@ const Pagination = ({staffPerPage, listLength, paginate, currentPage}) => {
     }
 
     return (
-        <div className='pagination'>
+        <div className={search ? 'pagination disabled' : 'pagination'}>
             <ul className='pagination__buttons'>
                 {
                     pageNumbers.map(number => (
