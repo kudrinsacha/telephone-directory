@@ -1,13 +1,12 @@
 .staff__list{
-    height: 900px;
     position: relative;
 }
 
 .staff__list__search{
     padding: 15px 0 0;
-    margin: 13px 0;
+    margin: 13px 0 13px 250px;
     width: 50%;
-
+    display: flex;
 }
 .staff__list__search input{
     width: 50%;
@@ -15,7 +14,7 @@
     border-bottom: 2px solid #9b9b9b;
     outline: 0;
     font-size: 1.3rem;
-    color: #fff;
+    color: black;
     padding: 7px 0;
     background: transparent;
     transition: border-color 0.2s;
@@ -55,11 +54,13 @@
 }
 
 .staff__list__title{
-    color: white;
+    color: black;
     font-size: 24px;
     display: flex;
     justify-content: space-between;
     width: 500px;
     margin-left: 100px;
-    border-bottom: 1px solid white;
+    margin-top: 40px;
+    font-weight: 700;
+    border-bottom: 1px solid black;
 }

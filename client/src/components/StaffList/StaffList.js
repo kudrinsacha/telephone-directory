@@ -11,7 +11,7 @@ const StaffList = () => {
     const [list, setList] = useState('')
     const [isToken, setIsToken] = useState(false)
     const [currentPage, setCurrentPage] = useState(1)
-    const [staffPerPage] = useState(25)
+    const [staffPerPage] = useState(50)
     const [search, setSearch] = useState('')
     const [filteredList, setFilteredList] = useState('')
 
@@ -50,14 +50,14 @@ const StaffList = () => {
                 <div className='staff__list__search'>
                     <input value={search}
                            onChange={handleChange}
-                           placeholder='Имя'
+                           placeholder='Фамилия'
                     />
-                    <label className='staff__list__search__label'>Имя</label>
+                    <label className='staff__list__search__label'>Фамилия</label>
                 </div>
 
                 <div className='staff__list__title'>
                     <div>
-                        Имя
+                        Фамилия
                     </div>
                     <div>
                         Номер

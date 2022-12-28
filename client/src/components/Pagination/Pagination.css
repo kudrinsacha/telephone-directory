@@ -11,6 +11,7 @@
     display: flex;
     list-style: none;
     font-size: 18px;
+    margin-top: 50px;
 }
 
 .pagination__buttons__item{
@@ -20,10 +21,10 @@
 }
 
 .pagination__buttons__item:hover{
-    color: white;
+    color: black;
 }
 
 .pagination__buttons__item.active{
     cursor: default;
-    color: white;
+    color: black;
 }
